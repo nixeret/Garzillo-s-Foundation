@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garzillo's Foundation – Prevenzione dal Phishing</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0d1b2a;
+  --navy2: #1b2d42;
+  --red: #c0392b;
+  --red-light: #e74c3c;
+  --gold: #d4a017;
+  --cream: #f8f4ed;
+  --text: #1a1a2e;
+}
+
+body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+/* HEADER */
+.header {
+  background: var(--navy);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  border-bottom: 3px solid var(--gold);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; letter-spacing: 0.02em; }
+.logo span { color: var(--gold); }
+
+.nav { display: flex; gap: 24px; }
+.nav a {
+  color: #c8d0e0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  transition: color .2s;
+  cursor: pointer;
+}
+.nav a:hover { color: var(--gold); }
+
+.nav-cta {
+  background: var(--red) !important;
+  color: #fff !important;
+  padding: 7px 18px;
+  border-radius: 4px;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: var(--red-light) !important; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 60%, var(--navy2) 100%);
+  color: #fff;
+  padding: 72px 2rem 64px;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 320px; height: 320px;
+  border: 60px solid rgba(212,160,23,0.08);
+  border-radius: 50%;
+}
+
+.hero-text { max-width: 520px; }
+
+.badge {
+  display: inline-block;
+  background: rgba(212,160,23,0.2);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 2px;
+  border: 1px solid rgba(212,160,23,0.4);
+  margin-bottom: 20px;
+}
+
+.hero h1 { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 900; line-height: 1.15; margin-bottom: 18px; }
+.hero h1 em { color: var(--gold); font-style: normal; }
+.hero p { font-size: 17px; font-weight: 300; color: #b8c4d8; line-height: 1.7; margin-bottom: 32px; }
+
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+  padding: 13px 28px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.btn-primary:hover { background: var(--red-light); transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  padding: 12px 28px;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.stat-box {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 28px 32px;
+  min-width: 200px;
+}
+.stat-box .number { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: var(--gold); display: block; }
+.stat-box .label { font-size: 13px; color: #8fa0b8; margin-top: 4px; }
+
+/* ALERT BAR */
+.alert-bar {
+  background: var(--red);
+  color: #fff;
+  text-align: center;
+  padding: 14px 2rem;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.alert-bar span { opacity: 0.8; font-weight: 400; }
+
+/* SECTION */
+.section { padding: 64px 2rem; max-width: 860px; margin: 0 auto; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.section-sub { color: #5a6170; font-size: 16px; margin-bottom: 40px; font-weight: 300; }
+.divider { width: 48px; height: 3px; background: var(--red); margin: 12px 0 24px; }
+
+/* TIPS GRID */
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+
+.tip-card {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0dcd5;
+  padding: 24px 20px;
+  transition: box-shadow .2s, transform .2s;
+}
+.tip-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.tip-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+.tip-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.tip-card p { font-size: 14px; color: #5a6170; line-height: 1.6; }
+
+/* QUIZ */
+.quiz-section { background: var(--navy); padding: 64px 2rem; }
+.quiz-inner { max-width: 680px; margin: 0 auto; }
+.quiz-title { font-family: 'Playfair Display', serif; font-size: 28px; color: #fff; margin-bottom: 6px; }
+.quiz-sub { color: #8fa0b8; font-size: 15px; margin-bottom: 32px; }
+
+.quiz-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 28px;
+}
+
+.quiz-q { color: #e8edf5; font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+
+.quiz-opt {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #c8d4e6;
+  padding: 13px 18px;
+  border-radius: 6px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background .2s, border-color .2s;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.quiz-opt:hover { background: rgba(212,160,23,0.12); border-color: rgba(212,160,23,0.4); color: var(--gold); }
+.quiz-opt.correct { background: rgba(39,174,96,0.18); border-color: #27ae60; color: #6fcf97; }
+.quiz-opt.wrong { background: rgba(192,57,43,0.18); border-color: var(--red); color: #e88080; }
+
+.quiz-feedback {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: none;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: rgba(39,174,96,0.12); color: #6fcf97; border: 1px solid rgba(39,174,96,0.3); }
+.quiz-feedback.bad { background: rgba(192,57,43,0.12); color: #e88080; border: 1px solid rgba(192,57,43,0.3); }
+
+.quiz-next {
+  margin-top: 18px;
+  background: var(--gold);
+  color: #1a1200;
+  border: none;
+  padding: 11px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: none;
+  font-family: 'Source Sans 3', sans-serif;
+  transition: opacity .2s;
+}
+.quiz-next:hover { opacity: 0.85; }
+.quiz-next.show { display: inline-block; }
+
+/* CHECKLIST */
+.checklist { display: flex; flex-direction: column; gap: 12px; }
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid #e0dcd5;
+  border-radius: 8px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.check-item:hover { background: #fdf9f2; }
+.check-item.checked { border-color: #27ae60; background: #f2faf5; }
+
+.check-box {
+  width: 22px; height: 22px;
+  border: 2px solid #c8c0b0;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s;
+  font-size: 13px;
+  color: #fff;
+}
+.check-item.checked .check-box { background: #27ae60; border-color: #27ae60; }
+
+.check-text h4 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.check-text p { font-size: 13px; color: #6a7180; line-height: 1.5; }
+.check-item.checked .check-text h4 { color: #1a6b35; text-decoration: line-through; opacity: 0.7; }
+
+.progress-bar-wrap { margin-top: 20px; }
+.progress-label { font-size: 13px; color: #6a7180; margin-bottom: 8px; }
+.progress-bar-bg { background: #e0dcd5; border-radius: 4px; height: 8px; overflow: hidden; }
+.progress-bar-fill { background: var(--red); height: 100%; border-radius: 4px; transition: width .4s; width: 0%; }
+
+/* FOOTER */
+.footer {
+  background: var(--navy);
+  color: #8fa0b8;
+  text-align: center;
+  padding: 36px 2rem;
+  font-size: 13px;
+  border-top: 2px solid var(--gold);
+}
+.footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+.footer-links a { color: #6a80a0; text-decoration: none; font-size: 13px; cursor: pointer; }
+.footer-links a:hover { color: var(--gold); }
+
+.report-btn {
+  margin-top: 24px;
+  display: inline-block;
+  background: transparent;
+  color: var(--red-light);
+  border: 1.5px solid var(--red);
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.report-btn:hover { background: rgba(192,57,43,0.12); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Garzillo's <span>Foundation</span></div>
+  <nav class="nav">
+    <a href="#tips">Consigli</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#checklist">Checklist</a>
+    <a href="#quiz" class="nav-cta">Mettiti alla prova →</a>
+  </nav>
+</header>
+
+<!-- ALERT BAR -->
+<div class="alert-bar">
+  <i class="ti ti-shield-exclamation"></i>
+  &nbsp;Allerta attiva: +340% di attacchi phishing registrati nel 2024 &nbsp;<span>— Rimani informato</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="badge">Sicurezza Digitale &nbsp;·&nbsp; Dal 2019</div>
+    <h1>Difenditi dal <em>Phishing</em><br>Prima che sia Tardi</h1>
+    <p>Ogni giorno milioni di email fraudolente cercano di ingannare le persone. Garzillo's Foundation ti insegna a riconoscerle e proteggere la tua identità digitale.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Inizia il Quiz Gratuito</button>
+      <button class="btn-outline" onclick="document.getElementById('tips').scrollIntoView({behavior:'smooth'})">Scopri i Consigli</button>
+    </div>
+  </div>
+  <div class="stat-box">
+    <span class="number">3,4 M</span>
+    <div class="label">email phishing inviate ogni giorno in Italia</div>
+    <div style="margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.1)">
+      <span class="number" style="font-size:32px;">1/4</span>
+      <div class="label">utenti ci clicca almeno una volta</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS SECTION -->
+<section class="section" id="tips">
+  <div class="section-title">Come Riconoscere un'Email di Phishing</div>
+  <div class="divider"></div>
+  <p class="section-sub">Segnali da non ignorare mai. Imparali a memoria.</p>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <span class="tip-icon"><i class="ti ti-at" style="font-size:28px;color:#c0392b"></i></span>
+      <h3>Mittente Sospetto</h3>
+      <p>Controlla sempre l'indirizzo email completo, non solo il nome visualizzato. I truffatori usano domini simili a quelli veri (es. @paypa1.com invece di @paypal.com).</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon"><i class="ti ti-urgent" style="font-size:28px;color:#c0392b"></i></span>
+      <h3>Urgenza Artificiale</h3>
+      <p>Frasi come "Il tuo account verrà sospeso entro 24 ore" o "Agisci subito!" sono tecniche di manipolazione per farti agire senza riflettere.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon"><i class="ti ti-link" style="font-size:28px;color:#c0392b"></i></span>
+      <h3>Link Ingannevoli</h3>
+      <p>Passa il mouse sul link prima di cliccare. Se l'URL mostrato è diverso da quello reale, è phishing. Non fidarti mai dei link nelle email non attese.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon"><i class="ti ti-pencil-exclamation" style="font-size:28px;color:#c0392b"></i></span>
+      <h3>Errori Grammaticali</h3>
+      <p>Molte email di phishing contengono errori ortografici, grammaticali o traduzioni strane. Le aziende serie curano le comunicazioni ufficiali.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon"><i class="ti ti-file-unknown" style="font-size:28px;color:#c0392b"></i></span>
+      <h3>Allegati Pericolosi</h3>
+      <p>Non aprire mai allegati .exe, .zip o .docm da mittenti sconosciuti. Possono installare malware sul tuo dispositivo in pochi secondi.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon"><i class="ti ti-id-badge-off" style="font-size:28px;color:#c0392b"></i></span>
+      <h3>Richieste di Dati</h3>
+      <p>Nessuna banca o azienda legittima ti chiederà password, codici PIN o dati bancari via email. Se lo fanno, è una truffa.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px;">
+    <button class="btn-primary" onclick="document.getElementById('checklist').scrollIntoView({behavior:'smooth'})">Vai alla Checklist di Sicurezza</button>
+  </div>
+</section>
+
+<!-- QUIZ SECTION -->
+<section class="quiz-section" id="quiz">
+  <div class="quiz-inner">
+    <div class="quiz-title">Mettiti alla Prova</div>
+    <p class="quiz-sub">Sai riconoscere un'email truffaldina? Fai il test interattivo.</p>
+    <div class="quiz-card" id="quiz-card">
+      <div id="quiz-score" style="text-align:right;font-size:13px;color:#8fa0b8;margin-bottom:12px;">Domanda <span id="q-num">1</span> di 4</div>
+      <div class="quiz-q" id="quiz-q"></div>
+      <div class="quiz-options" id="quiz-opts"></div>
+      <div class="quiz-feedback" id="quiz-fb"></div>
+      <button class="quiz-next" id="quiz-next" onclick="nextQ()">Prossima domanda →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST SECTION -->
+<section class="section" id="checklist">
+  <div class="section-title">Checklist di Sicurezza Email</div>
+  <div class="divider"></div>
+  <p class="section-sub">Spunta ogni punto per diventare un esperto di sicurezza digitale.</p>
+  <div class="checklist">
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <h4>Usa un gestore di password</h4>
+        <p>Non riutilizzare la stessa password su più siti. Un password manager crea e salva password sicure per te.</p>
+      </div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <h4>Attiva l'autenticazione a due fattori (2FA)</h4>
+        <p>Aggiunge un livello di protezione: anche se rubano la password, non possono accedere senza il secondo codice.</p>
+      </div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <h4>Tieni il software sempre aggiornato</h4>
+        <p>Gli aggiornamenti correggono vulnerabilità che i cybercriminali sfruttano. Non rimandare.</p>
+      </div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <h4>Controlla il mittente prima di rispondere</h4>
+        <p>Leggi sempre l'indirizzo email completo, non solo il nome. Un carattere diverso può fare la differenza.</p>
+      </div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <h4>Non cliccare link da email non attese</h4>
+        <p>Se non hai richiesto nulla, vai direttamente sul sito ufficiale digitando l'indirizzo nel browser.</p>
+      </div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">
+        <h4>Segnala le email sospette</h4>
+        <p>Usa il tasto "Segnala phishing" del tuo client email. Proteggi anche gli altri utenti.</p>
+      </div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-label">Completamento: <span id="progress-pct">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-fill"></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;color:#fff;">
+    <strong style="color:var(--gold)">Garzillo's Foundation</strong>
+  </div>
+  <div>Proteggere le persone dal phishing, un'email alla volta.</div>
+  <button class="report-btn" onclick="alert('Grazie per la segnalazione! Analizzeremo l\'email entro 24h.')">
+    <i class="ti ti-mail-exclamation"></i>
+    &nbsp; Segnala un'email sospetta
+  </button>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contatti</a>
+    <a href="#">Risorse</a>
+    <a href="#">Newsletter</a>
+  </div>
+  <div style="margin-top:20px;font-size:12px;opacity:0.5;">© 2025 Garzillo's Foundation. Tutti i diritti riservati.</div>
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "Ricevi un'email da \"supporto@paypa1.com\" che ti dice che il tuo account è stato sospeso. Cosa fai?",
+    opts: [
+      { t: "Clicco il link per sbloccare subito l'account", ok: false },
+      { t: "Verifico l'indirizzo mittente: \"paypa1.com\" è falso, lo segnalo", ok: true },
+      { t: "Rispondo all'email chiedendo spiegazioni", ok: false },
+      { t: "Inoltro l'email a un amico per chiedere consiglio", ok: false }
+    ],
+    ok_msg: "✓ Esatto! L'indirizzo \"paypa1.com\" con la cifra 1 al posto della \"l\" è un classico trucco di phishing.",
+    bad_msg: "✗ Attenzione! L'indirizzo \"paypa1.com\" è falso. Verifica sempre il dominio prima di agire."
+  },
+  {
+    q: "Un'email di Amazon ti chiede di confermare un ordine che non hai fatto, allegando un file .zip. Cosa fai?",
+    opts: [
+      { t: "Apro il file per capire di cosa si tratta", ok: false },
+      { t: "Clicco su \"Annulla ordine\" nel link dell'email", ok: false },
+      { t: "Non apro l'allegato e accedo ad Amazon direttamente dal browser", ok: true },
+      { t: "Rispondo all'email dicendo che non ho fatto ordini", ok: false }
+    ],
+    ok_msg: "✓ Perfetto! Non bisogna mai aprire allegati sospetti né cliccare link nelle email. Vai sempre direttamente sul sito.",
+    bad_msg: "✗ Sbagliato. Gli allegati .zip possono contenere malware. Accedi sempre direttamente al sito ufficiale."
+  },
+  {
+    q: "Ricevi un'email dalla tua banca con il logo ufficiale che ti chiede le credenziali di accesso per \"verificare il tuo account\".",
+    opts: [
+      { t: "Inserisco i dati, sembra ufficiale", ok: false },
+      { t: "Le banche non chiedono mai credenziali via email: lo segnalo come phishing", ok: true },
+      { t: "Rispondo chiedendo perché ne hanno bisogno", ok: false },
+      { t: "Chiamo il numero di telefono indicato nell'email", ok: false }
+    ],
+    ok_msg: "✓ Corretto! Nessuna banca legittima chiede mai password o credenziali via email.",
+    bad_msg: "✗ Attenzione! Le banche non chiedono mai credenziali via email. I loghi possono essere copiati facilmente."
+  },
+  {
+    q: "Un'email ti avvisa che hai vinto un iPhone. Per riceverlo devi pagare solo le spese di spedizione di €2.",
+    opts: [
+      { t: "Pago subito, €2 sono pochissimi per un iPhone!", ok: false },
+      { t: "Contesto il premio, le spese di spedizione sembrano strane", ok: false },
+      { t: "Riconosco la truffa e cancello l'email", ok: true },
+      { t: "Inoltro a tutti i miei contatti la buona notizia", ok: false }
+    ],
+    ok_msg: "✓ Ottimo! Premi inaspettati con piccoli pagamenti iniziali sono una classica tecnica di truffa.",
+    bad_msg: "✗ Sbagliato! Queste sono truffe note: chiedono piccole somme per poi rubare i dati della carta."
+  }
+];
+
+let currentQ = 0, score = 0, answered = false;
+
+function renderQ() {
+  const q = questions[currentQ];
+  document.getElementById('q-num').textContent = currentQ + 1;
+  document.getElementById('quiz-q').textContent = q.q;
+  const optsEl = document.getElementById('quiz-opts');
+  optsEl.innerHTML = '';
+  q.opts.forEach((o) => {
+    const b = document.createElement('button');
+    b.className = 'quiz-opt';
+    b.textContent = o.t;
+    b.onclick = () => answer(b, o.ok);
+    optsEl.appendChild(b);
+  });
+  document.getElementById('quiz-fb').className = 'quiz-feedback';
+  document.getElementById('quiz-fb').textContent = '';
+  document.getElementById('quiz-next').className = 'quiz-next';
+  answered = false;
+}
+
+function answer(btn, correct) {
+  if (answered) return;
+  answered = true;
+  const q = questions[currentQ];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach((b, i) => {
+    b.disabled = true;
+    if (q.opts[i].ok) b.classList.add('correct');
+  });
+  if (!correct) btn.classList.add('wrong');
+  else score++;
+  const fb = document.getElementById('quiz-fb');
+  fb.textContent = correct ? q.ok_msg : q.bad_msg;
+  fb.className = 'quiz-feedback show ' + (correct ? 'ok' : 'bad');
+  document.getElementById('quiz-next').className = 'quiz-next show';
+}
+
+function nextQ() {
+  currentQ++;
+  if (currentQ >= questions.length) {
+    document.getElementById('quiz-card').innerHTML = `
+      <div style="text-align:center;padding:20px 0;">
+        <div style="font-size:48px;margin-bottom:16px;">${score >= 3 ? '🛡️' : '⚠️'}</div>
+        <div style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;margin-bottom:12px;">
+          Hai totalizzato ${score}/4
+        </div>
+        <div style="color:#8fa0b8;font-size:15px;line-height:1.6;margin-bottom:24px;">
+          ${score === 4 ? "Eccellente! Sei un esperto di sicurezza email. Continua così e condividi queste conoscenze." :
+            score >= 2 ? "Buon risultato! Ma c'è ancora qualcosa da imparare. Rileggi i consigli qui sopra." :
+            "Devi approfondire la sicurezza email. Leggi attentamente i nostri consigli e riprova."}
+        </div>
+        <button class="btn-primary" onclick="resetQuiz()">Riprova il Quiz</button>
+      </div>
+    `;
+    return;
+  }
+  renderQ();
+}
+
+function resetQuiz() {
+  currentQ = 0; score = 0;
+  document.getElementById('quiz-card').innerHTML = `
+    <div id="quiz-score" style="text-align:right;font-size:13px;color:#8fa0b8;margin-bottom:12px;">Domanda <span id="q-num">1</span> di 4</div>
+    <div class="quiz-q" id="quiz-q"></div>
+    <div class="quiz-options" id="quiz-opts"></div>
+    <div class="quiz-feedback" id="quiz-fb"></div>
+    <button class="quiz-next" id="quiz-next" onclick="nextQ()">Prossima domanda →</button>
+  `;
+  renderQ();
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  el.querySelector('.check-box').textContent = el.classList.contains('checked') ? '✓' : '';
+  const items = document.querySelectorAll('.check-item');
+  const checked = document.querySelectorAll('.check-item.checked').length;
+  const pct = Math.round((checked / items.length) * 100);
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+renderQ();
+</script>
+</body>
+</html>
